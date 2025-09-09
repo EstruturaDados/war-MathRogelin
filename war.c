@@ -31,6 +31,24 @@
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
+
+// bibliotecas
+#include <stdio.h> //básico
+#include <string.h> //string - texto ou cadeia de caracteres
+// constante global para por limite de cadastro na array
+#define MAX_TERRITORIO 5
+// criando um struct ou molde
+struct territorio{
+    char nome[30];
+    char cor[10];
+    int tropas;
+};
+// função pra limpar os \n dos scanf()
+void limparBufferEntrada(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
 int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
@@ -50,6 +68,7 @@ int main() {
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+
 
     return 0;
 }
