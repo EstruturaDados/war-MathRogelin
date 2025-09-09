@@ -76,6 +76,58 @@ int main() {
     // variavel para saber a opcao do usuário foi cadastro (1), lista (2) ou sair (0)
     int opcao;
 
+    
+    // loop de perguntas
+    do{
+        printf("===============================================\n\n");
+        printf("WAR ESTRUTURADO - CADASTRO INICIAL\n");
+        printf("===============================================\n\n");
+        printf(" 1 - Cadastrar territorio\n");
+        printf(" 2 - Listar os territorios\n");
+        printf(" 0 - Sair do programa\n");
+        printf("-----------------------------------------------\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao){
+        case 1:
+            if (totalTerritorios < MAX_TERRITORIO){
+                printf("----- Cadastrar territorio 1 -----\n");
+
+                printf("Nome do Territorio (America, Europa, Asia):");
+                fgets(cadastro[totalTerritorios].nome, MAX_TERRITORIO, stdin);
+
+                printf("Cor das tropas (amarelo, azul, branco):");
+                fgets(cadastro[totalTerritorios].cor, MAX_TERRITORIO, stdin);
+
+                cadastro[totalTerritorios].nome[strcspn(cadastro[totalTerritorios].nome, "\n")] = '\0';
+                cadastro[totalTerritorios].cor[strcspn(cadastro[totalTerritorios].cor, "\n")] = '\0';
+
+                printf("Numero de tropas: ");
+                scanf("%d", cadastro[totalTerritorios].tropas, MAX_TERRITORIO);
+                limparBufferEntrada();
+
+                totalTerritorios++;
+                printf("\nTerritorios cadastrados com sucesso!\n");
+            }else{
+                printf("Todos os territórios preenchidos! Nao e possivel cadastrar mais tropas.\n");
+            }
+            
+            break;
+        
+        case 2:
+            /* code */
+            break;
+        case 0:
+            /* code */
+            break;
+        
+        default:
+            break;
+        }
+        
+    } while (opcao != 0); //repetir se diferente de zero
+
 
     return 0;
 }
