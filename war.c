@@ -48,7 +48,7 @@ void limparBufferEntrada(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
-
+// função principal
 int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
@@ -68,6 +68,13 @@ int main() {
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+
+    // define array para guarda struct com molde pronto e define seu limite 5
+    struct territorio cadastro[MAX_TERRITORIO];
+    // variavel para checar se a quantidade de territorios preenchidos foi completada
+    int totalTerritorios = 0;
+    // variavel para saber a opcao do usuário foi cadastro (1), lista (2) ou sair (0)
+    int opcao;
 
 
     return 0;
