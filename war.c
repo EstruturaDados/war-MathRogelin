@@ -132,15 +132,15 @@ int main() {
             }
             
             break;
-        
-        case 2:
-            /* code */
-            break;
         case 0:
-            /* code */
+            printf("Saindo do programa...");
+            getchar();
             break;
         
         default:
+            printf("\nOpcao invalida! Tente novamente...");
+            printf("\nPressione Enter para continuar...");
+            getchar();
             break;
         }
         
