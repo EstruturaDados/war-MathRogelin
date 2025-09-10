@@ -80,19 +80,21 @@ int main() {
     
     // loop de perguntas
     do{
+        printf("===============================================\n");
+        printf("       WAR ESTRUTURADO - CADASTRO INICIAL      \n");
         printf("===============================================\n\n");
-        printf("WAR ESTRUTURADO - CADASTRO INICIAL\n");
-        printf("===============================================\n\n");
-        printf(" 1 - Cadastrar territorio\n");
-        printf(" 2 - Listar os territorios\n");
+        printf(" 1 - Cadastrar territorio e Listar os territorios\n");
         printf(" 0 - Sair do programa\n");
         printf("-----------------------------------------------\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
+        // limpar os \ns do buffer
+        limparBufferEntrada();
 
         switch (opcao){
+        // caso for 1 
         case 1:
-            // coferir se é possível cadastrar, se totalTerritorios for menos que MAX_TERRITORIO (5)
+        // coferir se é possível cadastrar, se totalTerritorios for menos que MAX_TERRITORIO (5)
             if (totalTerritorios < MAX_TERRITORIO){
                 for (int i = 0; i < MAX_TERRITORIO; i++){
                     // criar uma enumeração no título
@@ -145,8 +147,9 @@ int main() {
         }
         
     } while (opcao != 0); //repetir se diferente de zero
-
-
+    
+    
+    // fim do programa
     return 0;
 }
 
