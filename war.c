@@ -37,6 +37,7 @@
 #include <string.h> //string - texto ou cadeia de caracteres
 // constante global para por limite de cadastro na array
 #define MAX_TERRITORIO 5
+#define TAM_STRING 30
 // criando um struct ou molde
 struct territorio{
     char nome[30];
@@ -91,26 +92,43 @@ int main() {
 
         switch (opcao){
         case 1:
+            // coferir se é possível cadastrar, se totalTerritorios for menos que MAX_TERRITORIO (5)
             if (totalTerritorios < MAX_TERRITORIO){
-                printf("----- Cadastrar territorio 1 -----\n");
-
-                printf("Nome do Territorio (America, Europa, Asia):");
-                fgets(cadastro[totalTerritorios].nome, MAX_TERRITORIO, stdin);
-
-                printf("Cor das tropas (amarelo, azul, branco):");
-                fgets(cadastro[totalTerritorios].cor, MAX_TERRITORIO, stdin);
-
-                cadastro[totalTerritorios].nome[strcspn(cadastro[totalTerritorios].nome, "\n")] = '\0';
-                cadastro[totalTerritorios].cor[strcspn(cadastro[totalTerritorios].cor, "\n")] = '\0';
-
-                printf("Numero de tropas: ");
-                scanf("%d", cadastro[totalTerritorios].tropas, MAX_TERRITORIO);
-                limparBufferEntrada();
-
-                totalTerritorios++;
+                for (int i = 0; i < MAX_TERRITORIO; i++){
+                    // criar uma enumeração no título
+                    printf("\n----- Cadastrar territorio %d -----\n", totalTerritorios + 1);
+                    // Nome
+                    printf("\nNome do Territorio (America, Europa, Asia):");
+                    fgets(cadastro[totalTerritorios].nome, TAM_STRING, stdin);
+                    // Cor da tropa
+                    printf("Cor das tropas (amarelo, azul, branco):");
+                    fgets(cadastro[totalTerritorios].cor, TAM_STRING, stdin);
+                    // acessar o nome e cor e colocar no lugar de \n por \0 (fim do programa), strcspn vai fazer isso procurando em cada letra
+                    cadastro[totalTerritorios].nome[strcspn(cadastro[totalTerritorios].nome, "\n")] = '\0';
+                    cadastro[totalTerritorios].cor[strcspn(cadastro[totalTerritorios].cor, "\n")] = '\0';
+                    // faço a pergunta com scanf ( que não ler o \n), para limpar o Buffer depois
+                    printf("Numero de tropas: ");
+                    scanf("%d", &cadastro[totalTerritorios].tropas);
+                    limparBufferEntrada();
+                    // atualizo a variavel
+                    totalTerritorios++;
+                }
+                
                 printf("\nTerritorios cadastrados com sucesso!\n");
+
             }else{
                 printf("Todos os territórios preenchidos! Nao e possivel cadastrar mais tropas.\n");
+            }
+            
+            printf("===============================================\n");
+            printf("          MAPA DO MUNDO - ESTADO ATUAL          \n");
+            printf("===============================================\n\n");
+
+            for (int i = 0; i < MAX_TERRITORIO; i++){
+                printf("Territorio %d: \n", i + 1);
+                printf(" - Nome: %s\n", cadastro[i].nome);
+                printf(" - Cor: %s \n", cadastro[i].cor);
+                printf(" - Tropas: %d \n\n", cadastro[i].tropas);
             }
             
             break;
