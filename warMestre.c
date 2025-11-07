@@ -173,6 +173,62 @@ int main() {
     atribuirMissao(missaoJogador, missoes, totalMissoes);
     exibirMissao(missaoJogador); // mostra apenas uma vez
 
-    
+    int opcao;
+    do {
+        printf("\n===============================================\n");
+        printf("                 MENU DE OPÇÕES                 \n");
+        printf("===============================================\n");
+        printf("1 - Exibir territórios\n");
+        printf("2 - Atacar\n");
+        printf("0 - Sair\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
+        limparBufferEntrada();
+
+        switch (opcao) {
+            case 1:
+                exibirTerritorios(mapa, totalTerritorios);
+                break;
+
+            case 2: {
+                int indAtacante, indDefensor;
+                exibirTerritorios(mapa, totalTerritorios);
+                printf("Escolha o número do território atacante: ");
+                scanf("%d", &indAtacante);
+                printf("Escolha o número do território defensor: ");
+                scanf("%d", &indDefensor);
+                limparBufferEntrada();
+
+                if (indAtacante < 1 || indAtacante > totalTerritorios ||
+                    indDefensor < 1 || indDefensor > totalTerritorios) {
+                    printf("\nEscolha inválida!\n");
+                    break;
+                }
+
+                atacar(&mapa[indAtacante - 1], &mapa[indDefensor - 1]);
+                break;
+            }
+
+            case 0:
+                printf("\nSaindo do programa...\n");
+                break;
+
+            default:
+                printf("\nOpção inválida!\n");
+                break;
+        }
+
+        // Depois de cada ação, o jogo checa se a missão foi cumprida
+        if (verificarMissao(missaoJogador, mapa, totalTerritorios)) {
+            printf("\n=========================\n");
+            printf("MISSÃO CUMPRIDA! VOCÊ VENCEU!\n");
+            printf("Missão: %s\n", missaoJogador);
+            printf("=========================\n");
+            break;
+        }
+
+    } while (opcao != 0);
+
+    liberarMemoria(mapa, missaoJogador);
     return 0;
 }
