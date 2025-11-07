@@ -64,6 +64,35 @@ void exibirTerritorios(struct Territorio *mapa, int total) {
         printf(" - Tropas: %d\n\n", mapa[i].tropas);
     }
 }
+
+// Função que simula o ataque
+void atacar(struct Territorio *atacante, struct Territorio *defensor) {
+    if (strcmp(atacante->cor, defensor->cor) == 0) {
+        printf("\nVocê não pode atacar um território da mesma cor!\n");
+        return;
+    }
+
+    if (atacante->tropas < 1) {
+        printf("\nO território atacante não tem tropas suficientes!\n");
+        return;
+    }
+
+    int dadoAtacante = (rand() % 6) + 1;
+    int dadoDefensor = (rand() % 6) + 1;
+
+    printf("\nRolando dados...\n");
+    printf("Atacante (%s) tirou: %d\n", atacante->nome, dadoAtacante);
+    printf("Defensor (%s) tirou: %d\n", defensor->nome, dadoDefensor);
+
+    if (dadoAtacante > dadoDefensor) {
+        printf("\nO atacante venceu a batalha!\n");
+        strcpy(defensor->cor, atacante->cor);
+        defensor->tropas = atacante->tropas / 2;
+    } else {
+        printf("\nO defensor resistiu! O atacante perdeu 1 tropa.\n");
+        atacante->tropas -= 1;
+    }
+}
 // função principal
 int main() {
     // 1. Configuração Inicial (Setup):
