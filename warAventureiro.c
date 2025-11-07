@@ -35,6 +35,8 @@
 // bibliotecas
 #include <stdio.h> //básico
 #include <string.h> //string - texto ou cadeia de caracteres
+#include <stdlib.h>
+#include <time.h> // para o numero aleatorio vou usar a função time
 // constante global para por limite de cadastro na array
 #define MAX_TERRITORIO 5
 #define TAM_STRING 30
@@ -48,6 +50,19 @@ struct territorio{
 void limparBufferEntrada(){
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
+}
+
+// Função para exibir todos os territórios
+void exibirTerritorios(struct Territorio *mapa, int total) {
+    printf("\n===============================================\n");
+    printf("               MAPA ATUALIZADO                 \n");
+    printf("===============================================\n");
+    for (int i = 0; i < total; i++) {
+        printf("Território %d:\n", i + 1);
+        printf(" - Nome: %s\n", mapa[i].nome);
+        printf(" - Cor: %s\n", mapa[i].cor);
+        printf(" - Tropas: %d\n\n", mapa[i].tropas);
+    }
 }
 // função principal
 int main() {
