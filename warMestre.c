@@ -124,3 +124,55 @@ void liberarMemoria(struct Territorio *mapa, char *missao) {
     free(mapa);
     free(missao);
 }
+
+int main() {
+    srand(time(NULL)); // gera números aleatórios diferentes a cada execução
+
+    int totalTerritorios;
+    printf("Quantos territórios deseja cadastrar? ");
+    scanf("%d", &totalTerritorios);
+    limparBufferEntrada();
+
+    // Aloca os territórios na memória
+    struct Territorio *mapa = (struct Territorio*) calloc(totalTerritorios, sizeof(struct Territorio));
+
+    // Cadastra os territórios
+    for (int i = 0; i < totalTerritorios; i++) {
+        printf("\n--- Cadastro do território %d ---\n", i + 1);
+        printf("Nome: ");
+        fgets(mapa[i].nome, TAM_STRING, stdin);
+        mapa[i].nome[strcspn(mapa[i].nome, "\n")] = '\0';
+
+        printf("Cor: ");
+        fgets(mapa[i].cor, 10, stdin);
+        mapa[i].cor[strcspn(mapa[i].cor, "\n")] = '\0';
+
+        printf("Tropas: ");
+        scanf("%d", &mapa[i].tropas);
+        limparBufferEntrada();
+    }
+
+    // Pede a cor do jogador
+    printf("\nDigite sua cor: ");
+    fgets(corJogador, 10, stdin);
+    corJogador[strcspn(corJogador, "\n")] = '\0';
+
+    // Vetor de missões pré-definidas
+    char *missoes[] = {
+        "Conquistar 2 territorios",
+        "Conquistar 3 territorios",
+        "Eliminar todas as tropas da cor vermelho",
+        "Eliminar todas as tropas da cor azul",
+        "Conquistar 1 territorio"
+    };
+
+    int totalMissoes = 5;
+
+    // Aloca a missão do jogador
+    char *missaoJogador = (char*) malloc(TAM_STRING * sizeof(char));
+    atribuirMissao(missaoJogador, missoes, totalMissoes);
+    exibirMissao(missaoJogador); // mostra apenas uma vez
+
+    
+    return 0;
+}
